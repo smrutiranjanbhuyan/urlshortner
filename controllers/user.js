@@ -14,7 +14,8 @@ async function handleUserSignup(req, res) {
             password, 
         });
 
-        console.log('User created:', user);
+        // console.log('User created:', user);
+        res.clearCookie('uid');
 
         res.status(201).redirect('/');
        
@@ -33,7 +34,7 @@ async function handleUserLogin(req, res) {
            
         if (!user) {
             // If user is not found, redirect to login with error message
-            return res.status(401).render('login', { error: "Invalid email or password" });
+            return res.status(401).redirect('login', { error: "Invalid email or password" });
         }
 
         // If user is found, redirect to home page

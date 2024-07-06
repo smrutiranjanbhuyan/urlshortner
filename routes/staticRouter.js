@@ -9,5 +9,7 @@ router.get('/signup',(req,res)=>{
   router.get('/login',(req,res)=>{
     res.render('login')
   })
-
+  router.get('/logout',(req,res)=>{
+    res.clearCookie('uid').redirect('/')
+  })
 module.exports = router;

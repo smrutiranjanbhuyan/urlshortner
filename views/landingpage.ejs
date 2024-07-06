@@ -103,7 +103,7 @@
             </div>
 
             <div class="flex items-center transition-all opacity-1 valid:">
-              <span
+              <span id="s-url"
                 class="text-sm font-semibold whitespace-nowrap truncate mx-auto"
               >
                 Shorten url
@@ -291,7 +291,11 @@
         </div>
       </div>
     </footer>
-    <script src="./scripts/script.js"></script>
-    <script src="./scripts/handeler.js"></script>
+<script>
+ document.querySelector('#shortUrl').addEventListener('click', () => {
+    window.location.href = '/login'; 
+});
+
+</script>
   </body>
 </html>
