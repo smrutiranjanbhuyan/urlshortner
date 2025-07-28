@@ -3,7 +3,7 @@ const {v4:uuidv4}=require('uuid')
 const {getUser,setUser}=require('../service/auth')
 async function handleUserSignup(req, res) {
     try {
-        console.log('Received signup request:', req.body);
+        // console.log('Received signup request:', req.body);
 
         const { fname, lname, email, password } = req.body;
 
