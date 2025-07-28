@@ -13,7 +13,7 @@ console.log(req.body.url);
   try {
     await URL.create({
       shortId: shortId,
-      redirctUrl: body.url,
+      redirectUrl: body.url,
       visitHistory: [],
       createdBy:req.user._id
     });

@@ -5,214 +5,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Shortener</title>
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css">
-    <style>
-        /* Custom styles */
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .form-control {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .shortened-urls {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .shortened-urls li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-        }
-
-        .container {
-            margin-top: 50px;
-            margin-bottom: 100px; /* Increased bottom margin for footer visibility */
-        }
-
-        /* Updated footer styles for better spacing and alignment */
-        footer {
-            margin-top: 50px;
-            padding: 20px 0;
-            background-color: #333;
-            color: #fff;
-        }
-
-        footer .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        footer .grid {
-            flex: 1;
-        }
-
-        footer h3 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        footer p {
-            font-size: 0.875rem;
-            color: #ccc;
-            line-height: 1.5;
-        }
-
-        footer ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        footer ul li {
-            margin-bottom: 5px;
-        }
-
-        footer .flex {
-            gap: 10px;
-        }
-
-        footer a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: #fff;
-        }
-
-        footer .fab {
-            font-size: 1.25rem;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 10px;
-            }
-
-            .shortened-urls {
-                padding: 0;
-            }
-
-            footer {
-                padding: 20px 10px;
-            }
-
-            footer .container {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-    </style>
+    <!-- ✅ Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
-    <!-- Navigation -->
-    <header class="fixed inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 bg-white/80 py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg">
-        <div class="px-4">
-            <div class="flex items-center justify-between">
-                <div class="flex-shrink-0">
-                    <a aria-current="page" class="flex items-center" href="/">
-                        <img class="h-7 w-auto" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="">
-                        
-                    </a>
-                </div>
-                <div class="hidden md:flex md:items-center md:justify-center md:gap-5">
-                    <a aria-current="page" class="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900" href="#">How it works</a>
-                    <a class="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900" href="#">Get in touch</a>
-                </div>
-                <div class="flex items-center justify-end gap-3">
-                    <a class="hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex" href="/">Home</a>
-                    <a class="hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex" href="/signup">Sign up</a>
-                    <a class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" href="/login">Login</a>
-                    <a class="inline-flex items-center justify-center rounded-xl bg-pink-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" href="/logout">Logout</a>
-                </div>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- ✅ Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg shadow-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-2">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Logo" class="h-7">
+                <span class="text-lg font-bold">URL Shortener</span>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex space-x-6 text-gray-700 font-medium">
+                <a href="#" class="hover:text-blue-600 transition">How it works</a>
+                <a href="#" class="hover:text-blue-600 transition">Get in touch</a>
+            </nav>
+
+            <!-- Auth Buttons -->
+            <div class="flex space-x-3">
+                <a href="/" class="hidden sm:inline-flex px-4 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm font-semibold">Home</a>
+                <a href="/signup" class="hidden sm:inline-flex px-4 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm font-semibold">Sign up</a>
+                <a href="/login" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-500 font-semibold text-sm">Login</a>
+                <a href="/logout" class="px-4 py-2 rounded-lg bg-pink-600 text-white hover:bg-pink-500 font-semibold text-sm">Logout</a>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <h1 class="mt-5 mb-4 text-center text-3xl font-bold text-gray-900">URL Shortener</h1>
-        <form action="/url" method="POST" class="text-center">
-            <div class="input-group mb-3">
-                <input type="url" class="form-control bg-white border border-gray-300 rounded-md py-2 px-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" placeholder="Enter URL" name="url" required>
-                <button class="btn btn-primary bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" type="submit">Shorten URL</button>
-            </div>
+    <!-- ✅ Main Section -->
+    <main class="max-w-3xl mx-auto mt-28 px-4">
+        <h1 class="text-center text-4xl font-extrabold mb-6 text-gray-900">Shorten Your URL</h1>
+        <form action="/url" method="POST" class="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <input type="url" name="url" placeholder="Enter your URL" required
+                class="w-full sm:flex-1 border border-gray-300 rounded-lg px-4 py-3 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md font-semibold transition">
+                Shorten
+            </button>
         </form>
-        <h3 class="text-center mt-8 mb-4 text-xl font-bold text-gray-900">Shortened URLs:</h3>
-        <ul class="list-group shortened-urls mb-8">
+
+        <!-- ✅ Shortened URLs -->
+        <h3 class="text-xl font-bold text-gray-900 mt-10 mb-4 text-center">Your Shortened URLs</h3>
+        <ul class="space-y-4">
             <% url.sort().reverse().forEach(function(url) { %>
-            <li class="list-group-item flex justify-between items-center bg-white rounded-md shadow-sm py-3 px-4 mb-4">
-                <a target="_blank" href="http://localhost:8001/<%= url.shortId %>" class="text-blue-600 hover:underline truncate w-3/5" title="http://localhost:8001/<%= url.shortId %>">http://localhost:8001/<%= url.shortId %></a>
-                <p><%= new Date(url.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></p>
-                <span class="badge bg-secondary text-gray-800">Clicks: <%= url.visitHistory.length %></span>
-                <button class="copy-btn bg-blue-500 hover:bg-blue-700 text-white px-3 py-1 rounded focus:outline-none" data-url="http://localhost:8001/<%= url.shortId %>">Copy</button>
+            <li class="flex flex-col sm:flex-row justify-between items-center bg-white rounded-xl shadow-md p-4 border border-gray-100">
+                <a href="http://localhost:8001/<%= url.shortId %>" target="_blank"
+                    class="text-blue-600 hover:underline truncate w-full sm:w-1/2 text-center sm:text-left"
+                    title="http://localhost:8001/<%= url.shortId %>">
+                    http://localhost:8001/<%= url.shortId %>
+                </a>
+                <div class="flex items-center space-x-4 mt-3 sm:mt-0">
+                    <p class="text-gray-500 text-sm"><%= new Date(url.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></p>
+                    <span class="text-gray-700 bg-gray-100 px-3 py-1 rounded-md text-sm">Clicks: <%= url.visitHistory.length %></span>
+                    <button class="copy-btn bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm"
+                        data-url="http://localhost:8001/<%= url.shortId %>">
+                        Copy
+                    </button>
+                </div>
             </li>
             <% }); %>
         </ul>
-    </div>
+    </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-6">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-lg font-bold mb-2">Company Name</h3>
-                    <p class="text-sm text-gray-400">Shorten URLs easily and efficiently with our service. Simplify your links and enhance sharing.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-2">Contact Us</h3>
-                    <ul class="text-sm">
-                        <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Phone: +91-79787-66971</a></li>
-                        <li class="mb-2"><a href="mailto:info@lorem.mail" class="text-gray-400 hover:text-white">Email: info@lorem.mail</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Address: 312 Lovely Street, NY</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-2">IMFO</h3>
-                    <div class="flex space-x-3">
-                        <span class="text-gray-600">   URLs created on this platform are subject to automatic deletion after 30 days for security and privacy reasons. Please ensure you have saved or shared your shortened URLs before they expire.</span>
-                    </div>
-                </div>
+    <!-- ✅ Footer -->
+    <footer class="bg-gray-900 text-gray-300 mt-12 py-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-xl font-bold mb-3 text-white">Company Name</h3>
+                <p class="text-sm">Shorten URLs easily and efficiently. Simplify your links and enhance sharing.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-3 text-white">Contact Us</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white">Phone: +91-79787-66971</a></li>
+                    <li><a href="mailto:info@lorem.mail" class="hover:text-white">Email: info@lorem.mail</a></li>
+                    <li><a href="#" class="hover:text-white">Address: 312 Lovely Street, NY</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-3 text-white">Info</h3>
+                <p class="text-sm">URLs created here are automatically deleted after 30 days for security reasons.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
-    <!-- JavaScript for copying shortened URLs -->
+    <!-- ✅ JS: Copy Button -->
     <script>
         document.addEventListener('click', function (event) {
-            if (event.target && event.target.classList.contains('copy-btn')) {
+            if (event.target.classList.contains('copy-btn')) {
                 const url = event.target.getAttribute('data-url');
-                copyToClipboard(url);
-                alert('Copied to clipboard!');
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Copied to clipboard!');
+                });
             }
         });
-
-        function copyToClipboard(text) {
-            const input = document.createElement('textarea');
-            input.value = text;
-            document.body.appendChild(input);
-            input.select();
-            document.execCommand('copy');
-            document.body.removeChild(input);
-        }
     </script>
 </body>
-
 </html>
