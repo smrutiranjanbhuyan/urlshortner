@@ -5,13 +5,13 @@ async function restrictToLoggedinUserOnly(req, res, next) {
         const userUid = req.cookies?.uid;
         console.log("userUid", userUid);
         if (!userUid) {
-            console.log("User null");
+            // console.log("User null");
             return res.redirect("/login");
         }
         
     
         const user = await getUser(userUid);
-        console.log("user", user);
+        // console.log("user", user);
         if (!user) {
             return res.redirect("/login");
         }

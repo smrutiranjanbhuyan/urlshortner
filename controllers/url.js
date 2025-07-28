@@ -3,7 +3,7 @@ const URL = require("../models/url");
 
 async function HandelGenerateNewShortURL(req, res) {
   const body = req.body;
-console.log(req.body.url);
+// console.log(req.body.url);
   if (!body || !body.url) {
     return res.status(400).json({ error: "URL is required" });
   }
