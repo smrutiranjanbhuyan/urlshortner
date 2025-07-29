@@ -94,20 +94,3 @@ The project follows a Model-View-Controller (MVC) architecture to keep the code 
     ```
     The server will start on the port specified in your `.env` file (e.g., http://localhost:8001).
 
-## Key Concepts for an Interview
-
-*   **MVC Architecture**: You can explain how the project separates concerns:
-    *   **Model** (`/models`): Defines the data structure (schemas for User and URL).
-    *   **View** (`/views`): Renders the UI using EJS templates.
-    *   **Controller** (`/controllers`): Contains the business logic that connects the Model and the View.
-*   **Middleware**: Discuss how Express middleware is used for core functionalities like:
-    *   Parsing request bodies (`express.json`, `express.urlencoded`).
-    *   Handling cookies (`cookie-parser`).
-    *   Implementing authentication (`restrictToLoggedinUserOnly`) and authorization (`checkAuth`) by verifying a JWT from the request cookies. This demonstrates a stateless and scalable authentication strategy.
-*   **Authentication vs. Authorization**:
-    *   **Authentication**: The `handleUserLogin` function generates a JWT, and the `checkAuth` middleware verifies this token to confirm *who the user is*.
-    *   **Authorization**: The `restrictToLoggedinUserOnly` middleware checks *what a user is allowed to do* (e.g., only logged-in users can create short URLs).
-*   **Database Indexing for Performance**:
-    *   An index on the `shortId` field is critical for fast lookups, making the redirection process highly efficient.
-    *   A **TTL (Time-To-Live) index** on the `createdAt` field is a smart database feature used here to automatically delete documents after 30 days, preventing data bloat without needing a separate cron job.
-*   **Asynchronous JavaScript**: The project heavily uses `async/await` for non-blocking database operations, which is essential for building a scalable and performant Node.js application.
