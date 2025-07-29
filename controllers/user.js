@@ -1,6 +1,5 @@
 const User = require('../models/user');
-const { v4: uuidv4 } = require('uuid');
-const { setUser } = require('../service/auth');
+const { generateToken } = require('../service/auth');
 
 async function handleUserSignup(req, res) {
     try {
@@ -17,7 +16,6 @@ async function handleUserSignup(req, res) {
         return res.redirect('/login');
     } catch (error) {
         console.error('Error during signup:', error);
-        // It's better to re-render the signup page with an error message
         return res.render('signup', {
             error: "Email already in use. Please try another.",
         });
@@ -38,9 +36,8 @@ async function handleUserLogin(req, res) {
             return res.status(401).render('login', { error: "Invalid email or password" });
         }
 
-        const sessionId = uuidv4();
-        setUser(sessionId, user);
-        res.cookie("uid", sessionId);
+        const token = generateToken(user);
+        res.cookie("token", token, { httpOnly: true });
         return res.redirect('/');
     } catch (error) {
         console.error('Error during login:', error);
@@ -48,7 +45,14 @@ async function handleUserLogin(req, res) {
     }
 }
 
+function handleUserLogout(req, res) {
+    // To log out, we simply clear the cookie containing the token.
+    res.clearCookie('token');
+    return res.redirect('/login');
+}
+
 module.exports = {
     handleUserSignup,
     handleUserLogin,
+    handleUserLogout,
 };

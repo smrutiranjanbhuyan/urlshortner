@@ -25,7 +25,7 @@ This is a full-stack web application that allows users to shorten long URLs, sim
 
 1.  **User Management**:
     *   A new user signs up with their name, email, and password. The password is securely hashed using `bcrypt` before being stored in the database.
-    *   When a user logs in, the system verifies their credentials. Upon success, a unique session ID is generated and stored in a cookie on the user's browser. This cookie is used to identify the user on subsequent requests.
+    *   When a user logs in, the system verifies their credentials. Upon success, a stateless **JSON Web Token (JWT)** is generated and stored in an `httpOnly` cookie. This token contains the user's identity and is sent with every subsequent request to authenticate the user.
 
 2.  **URL Shortening**:
     *   An authenticated user submits a long URL through their dashboard.
@@ -44,7 +44,7 @@ This is a full-stack web application that allows users to shorten long URLs, sim
 *   **Backend**: Node.js, Express.js
 *   **Database**: MongoDB with Mongoose ODM
 *   **View Engine**: EJS (Embedded JavaScript templates)
-*   **Authentication**: Custom stateful session management using cookies. Passwords are hashed with `bcrypt`.
+*   **Authentication**: Stateless authentication using **JSON Web Tokens (JWT)**. Passwords are hashed with `bcrypt`.
 *   **ID Generation**: `shortid` for creating unique URL aliases.
 *   **Environment Variables**: `dotenv` for managing configuration securely.
 
@@ -103,9 +103,9 @@ The project follows a Model-View-Controller (MVC) architecture to keep the code 
 *   **Middleware**: Discuss how Express middleware is used for core functionalities like:
     *   Parsing request bodies (`express.json`, `express.urlencoded`).
     *   Handling cookies (`cookie-parser`).
-    *   Implementing authentication (`restrictToLoggedinUserOnly`) and authorization (`checkAuth`). This shows a modular approach to building the request-handling pipeline.
+    *   Implementing authentication (`restrictToLoggedinUserOnly`) and authorization (`checkAuth`) by verifying a JWT from the request cookies. This demonstrates a stateless and scalable authentication strategy.
 *   **Authentication vs. Authorization**:
-    *   **Authentication**: The `handleUserLogin` function and `checkAuth` middleware work together to verify *who the user is*.
+    *   **Authentication**: The `handleUserLogin` function generates a JWT, and the `checkAuth` middleware verifies this token to confirm *who the user is*.
     *   **Authorization**: The `restrictToLoggedinUserOnly` middleware checks *what a user is allowed to do* (e.g., only logged-in users can create short URLs).
 *   **Database Indexing for Performance**:
     *   An index on the `shortId` field is critical for fast lookups, making the redirection process highly efficient.

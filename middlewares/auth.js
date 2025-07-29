@@ -1,38 +1,34 @@
-const { getUser } = require("../service/auth");
+const { verifyToken } = require("../service/auth");
 
-async function restrictToLoggedinUserOnly(req, res, next) {
+function restrictToLoggedinUserOnly(req, res, next) {
     try {
-        const userUid = req.cookies?.uid;
-        // console.log("userUid", userUid);
-        if (!userUid) {
-            // console.log("User null");
+        const token = req.cookies?.token;
+
+        if (!token) {
             return res.redirect("/login");
         }
-        
-    
-        const user = await getUser(userUid);
-        // console.log("user", user);
+
+        const user = verifyToken(token);
+
         if (!user) {
             return res.redirect("/login");
         }
         req.user = user;
         next();
     } catch (error) {
-        console.error("Error in restrictToLoggedinUserOnly:", error);
-        res.status(500).send("Internal Server Error");
+        return res.redirect("/login");
     }
 }
 
-async function checkAuth(req, res, next) {
+function checkAuth(req, res, next) {
     try {
-        const userUid = req.cookies?.uid;
-    
-        const user = await getUser(userUid);
+        const token = req.cookies?.token;
+        const user = verifyToken(token);
         req.user = user;
         next();
     } catch (error) {
-        console.error("Error in restrictToLoggedinUserOnly:", error);
-        res.status(500).send("Internal Server Error");
+        req.user = null;
+        next();
     }
 }
 
