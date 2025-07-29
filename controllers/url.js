@@ -1,7 +1,7 @@
 const shortid= require("shortid");
 const URL = require("../models/url");
 
-async function HandelGenerateNewShortURL(req, res) {
+async function handleGenerateNewShortURL(req, res) {
   const body = req.body;
 // console.log(req.body.url);
   if (!body || !body.url) {
@@ -28,5 +28,5 @@ async function HandelGenerateNewShortURL(req, res) {
 }
 
 module.exports = {
-  HandelGenerateNewShortURL,
+  handleGenerateNewShortURL,
 };

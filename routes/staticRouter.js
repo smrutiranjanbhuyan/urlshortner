@@ -1,8 +1,8 @@
 const express = require('express');
-const {HandelStaticPage}=require('../controllers/staticRouter')
+const {handleStaticPage}=require('../controllers/staticRouter')
 const router = express.Router();
 
-router.get('/',HandelStaticPage);
+router.get('/',handleStaticPage);
 router.get('/signup',(req,res)=>{
     res.render('signup')
   })

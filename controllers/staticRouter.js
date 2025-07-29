@@ -1,6 +1,6 @@
 
 const URL = require("../models/url");
-async function HandelStaticPage(req, res) {
+async function handleStaticPage(req, res) {
     try {
         if(!req.user) return res.render('landingpage')
         const allUrls = await URL.find({createdBy:req.user._id});
@@ -12,5 +12,5 @@ async function HandelStaticPage(req, res) {
     }
 }
 module.exports = {
-    HandelStaticPage,
+    handleStaticPage,
   };

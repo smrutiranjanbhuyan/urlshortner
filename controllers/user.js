@@ -1,10 +1,9 @@
 const User = require('../models/user');
-const {v4:uuidv4}=require('uuid')
-const {getUser,setUser}=require('../service/auth')
+const { v4: uuidv4 } = require('uuid');
+const { setUser } = require('../service/auth');
+
 async function handleUserSignup(req, res) {
     try {
-        // console.log('Received signup request:', req.body);
-
         const { fname, lname, email, password } = req.body;
 
         const user = await User.create({
@@ -14,39 +13,38 @@ async function handleUserSignup(req, res) {
             password, 
         });
 
-        // console.log('User created:', user);
-        res.clearCookie('uid');
-
-        res.status(201).redirect('/');
-       
+        // Redirect to the login page after successful signup
+        return res.redirect('/login');
     } catch (error) {
         console.error('Error during signup:', error);
-        res.status(500).redirect('/signup');
+        // It's better to re-render the signup page with an error message
+        return res.render('signup', {
+            error: "Email already in use. Please try another.",
+        });
     }
 }
 
 async function handleUserLogin(req, res) {
     try {
         const { email, password } = req.body;
-        // console.log('Received signup request:', req.body);
-
-        const user = await User.findOne({ email, password });
+        const user = await User.findOne({ email });
            
         if (!user) {
-            // If user is not found, redirect to login with error message
-            return res.status(401).redirect('login', { error: "Invalid email or password" });
+            return res.status(401).render('login', { error: "Invalid email or password" });
         }
 
-        // If user is found, redirect to home page
-        const sessinId=uuidv4();
-        
-        setUser(sessinId,user)
-        res.cookie("uid",sessinId)
-        res.status(200).redirect('/');
-       
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+            return res.status(401).render('login', { error: "Invalid email or password" });
+        }
+
+        const sessionId = uuidv4();
+        setUser(sessionId, user);
+        res.cookie("uid", sessionId);
+        return res.redirect('/');
     } catch (error) {
         console.error('Error during login:', error);
-        res.status(500).redirect('/login');
+        res.status(500).render('login', { error: "An unexpected error occurred." });
     }
 }
 

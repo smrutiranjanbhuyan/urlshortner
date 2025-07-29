@@ -1,6 +1,6 @@
 const URL = require("../models/url");
 
-async function HandelPostingUrl(req, res) {
+async function handleRedirect(req, res) {
   const shortId = req.params.shortId;
   try {
     const entry = await URL.findOneAndUpdate(
@@ -20,5 +20,5 @@ async function HandelPostingUrl(req, res) {
   }
 }
 module.exports = {
-  HandelPostingUrl,
+  handleRedirect,
 };

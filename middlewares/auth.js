@@ -23,7 +23,7 @@ async function restrictToLoggedinUserOnly(req, res, next) {
     }
 }
 
-async function cheakAuth(req, res, next) {
+async function checkAuth(req, res, next) {
     try {
         const userUid = req.cookies?.uid;
     
@@ -38,5 +38,5 @@ async function cheakAuth(req, res, next) {
 
 module.exports = {
     restrictToLoggedinUserOnly,
-    cheakAuth,
+    checkAuth,
 };

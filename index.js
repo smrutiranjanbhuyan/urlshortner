@@ -4,9 +4,7 @@ const { connectToMongoDb } = require("./connect");
 const path = require("path");
 
 const  cookieParser=require('cookie-parser')
-const URL = require("./models/url");
-
-const { restrictToLoggedinUserOnly,cheakAuth}=require('./middlewares/auth')
+const { restrictToLoggedinUserOnly, checkAuth}=require('./middlewares/auth')
 
 const urlRoute = require("./routes/url");
 const staticRouter = require("./routes/staticRouter");
@@ -27,7 +25,7 @@ app.set("views", path.resolve("./views"));
 app.set("public" ,path.resolve("./public"))
 app.use("/url", restrictToLoggedinUserOnly,urlRoute);
 app.use("/user", userRoute);
-app.use("/",cheakAuth, staticRouter);
+app.use("/", checkAuth, staticRouter);
 app.use("/",shortUrlRoute);
 
 

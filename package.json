@@ -9,17 +9,18 @@
   "author": "Smruti",
   "license": "ISC",
   "dependencies": {
-    "cookie-parser": "^1.4.6",
-    "dotenv": "^16.4.5",
-    "ejs": "^3.1.10",
-    "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.3.3",
-    "nodemon": "^3.1.0",
-    "shortid": "^2.2.16",
-    "uuid": "^9.0.1"
-  },
-  "devDependencies": {},
+  "bcrypt": "^6.1.0",
+  "cookie-parser": "^1.4.7",
+  "dotenv": "^16.5.0",
+  "ejs": "^3.1.11",
+  "express": "^4.19.3",
+  "jsonwebtoken": "^10.0.0",
+  "mongoose": "^8.4.0",
+  "nodemon": "^3.1.1",
+  "shortid": "^2.2.16",      
+  "uuid": "^9.1.0"
+}
+,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/smrutiranjanbhuyan/url_shortner.git"
